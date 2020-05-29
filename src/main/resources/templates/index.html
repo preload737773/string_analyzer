@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Syntax analyzer. Variant 9</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script>
+        function analyze() {
+            fetch('/analyze',
+                {method: 'POST',
+                 body: document.getElementById('input').value
+                }).then((response) => {
+                    response.text().then((text) => {
+                        let responseContainer = document.getElementById('response')
+                        responseContainer.innerHTML = text
+                        responseContainer.setAttribute("style", (text.includes("Error")) ? "color: red" : "color: green")
+                    })
+            })
+        }
+    </script>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        #input {
+            position: center;
+            width: 50%;
+            height: 42px;
+            font-size: 42px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="body">
+        <input type="text" placeholder="Enter your string" id="input">
+        <input type="submit" onclick="analyze()">
+    </div>
+    <div class="response">
+        <h4 id="response"></h4>
+    </div>
+</div>
+</body>
+</html>
